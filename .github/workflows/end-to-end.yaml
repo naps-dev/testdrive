@@ -1,0 +1,27 @@
+name: End-to-End Test
+run-name: ${{github.actor}} is conducting an end-to-end test of the DCO stack
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches: [main]
+    tags: v**
+permissions:
+  id-token: write
+  contents: read
+default:
+  run:
+    shell: bash
+env:
+  WORKING: e2e-working
+
+jobs:
+  fetch:
+    runs-on: [self-hosted, onprem]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch Zarf Packages
+        run: |
+          ./bin/fetch -p packages.yaml -w "${{ env.WORKING }}"
