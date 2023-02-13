@@ -51,7 +51,7 @@ while IFS=$'\t' read -r name version description _; do
   
   s3_url=s3://naps-dev-artifacts/naps-dev/${name}/${version}/zarf-package-${name}-amd64.tar.zst
 
-  aws s3 cp ${s3_url} ${working}
+  aws s3 cp ${s3_url} ${working} --no-progress
   if [ $? -ne 0 ]; then
     echo "${name}/${version} package copy failed"
     exit 1
