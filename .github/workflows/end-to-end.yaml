@@ -24,4 +24,4 @@ jobs:
 
       - name: Fetch Zarf Packages
         run: |
-          ./bin/fetch -p packages.yaml -w "${{ env.WORKING }}"
+          ./bin/fetch.sh -p packages.yaml -w "${{ env.WORKING }}"
